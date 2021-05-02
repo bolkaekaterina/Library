@@ -29,7 +29,7 @@ public class main {
 		 */
 
 		
-		  String message4 = "FIND_BOOK_BY_AUTHOR Федор Достоевский";
+		  String message4 = "FIND_BOOK_BY_AUTHOR Эрих Мариа Ремарк";
 		  System.out.println(controller.executeTask(message4));
 		 
 	}
