@@ -12,18 +12,21 @@ public class User implements Serializable{
 	private String lastName;
 	private int age;
 	private String eMail;
+	private UserRole role;
+	
 	
 	public User() {
 		super();
 	}
 	
-	public User(String login, String password, String firstName, String lastName, int age, String eMail) {
+	public User(String login, String password, String firstName, String lastName, int age, String eMail, UserRole role) {
 		this.login = login;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
 		this.eMail = eMail;
+		this.role = role;
 	}
 
 	public String getLogin() {
@@ -73,6 +76,15 @@ public class User implements Serializable{
 	public void seteMail(String eMail) {
 		this.eMail = eMail;
 	}
+	
+	public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
+	
 
 	@Override
 	public int hashCode() {
@@ -84,6 +96,7 @@ public class User implements Serializable{
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		return result;
 	}
 
@@ -123,21 +136,14 @@ public class User implements Serializable{
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (role != other.role)
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return getClass().getName() + " [login=" + login + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", age=" + age + ", eMail=" + eMail + "]";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-
+				+ ", age=" + age + ", eMail=" + eMail + ", role=" + role + "]";
+	}	
 }

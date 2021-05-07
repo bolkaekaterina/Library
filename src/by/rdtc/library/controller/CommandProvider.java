@@ -30,7 +30,6 @@ final class CommandProvider {
 			commandName = CommandName.valueOf(name.toUpperCase());
 			command = repository.get(commandName);
 		} catch (IllegalArgumentException | NullPointerException e) {
-			// TODO write log
 			command = repository.get(CommandName.WRONG_REQUEST);
 		}
 		return command;

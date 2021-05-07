@@ -1,6 +1,7 @@
 package by.rdtc.library.service.impl;
 
 import by.rdtc.library.bean.User;
+import by.rdtc.library.bean.UserRole;
 import by.rdtc.library.dao.UserDAO;
 import by.rdtc.library.dao.factory.DAOFactory;
 import by.rdtc.library.service.UserService;
@@ -9,7 +10,9 @@ import by.rdtc.library.service.exception.ServiceException;
 public class UserServiceImpl implements UserService {
 
 	@Override
-	public void signIn(String login, String password) throws ServiceException {
+	public UserRole signIn(String login, String password) throws ServiceException {
+		
+		UserRole role = null;
 
 		if (login == null || login.isEmpty()) {
 			throw new ServiceException("Incorrect login");
@@ -22,10 +25,12 @@ public class UserServiceImpl implements UserService {
 		try {
 			DAOFactory daoObjectFactory = DAOFactory.getInstance();
 			UserDAO userDAO = daoObjectFactory.getUserDAO();
-			userDAO.signIn(login, password);
+			role = userDAO.signIn(login, password);
+			
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		}
+		return role;
 	}
 
 	@Override

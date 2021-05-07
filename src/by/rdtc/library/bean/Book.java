@@ -11,17 +11,19 @@ public class Book implements Serializable{
 	private String author;
 	private int numberOfPages;
 	private int year;
+	private AccessLevel accessLevel;
 	
 	public Book() {
 		super();
 	}
 		
-	public  Book(long idBook, String bookName, String author, int numberOfPages, int year ) {
+	public  Book(long idBook, String bookName, String author, int numberOfPages, int year, AccessLevel accessLevel ) {
 		this.idBook = idBook;
 		this.bookName = bookName;
 		this.author = author;
 		this.numberOfPages = numberOfPages;
 		this.year = year;
+		this.accessLevel = accessLevel;
 	}
 
 	public long getIdBook() {
@@ -63,14 +65,20 @@ public class Book implements Serializable{
 	public void setYear(int year) {
 		this.year = year;
 	}
+	
+	public AccessLevel getAccessLevel() {
+		return accessLevel;
+	}
 
-	
-	
+	public void setAccessLevel(AccessLevel accessLevel) {
+		this.accessLevel = accessLevel;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((accessLevel == null) ? 0 : accessLevel.hashCode());
 		result = prime * result + ((author == null) ? 0 : author.hashCode());
 		result = prime * result + ((bookName == null) ? 0 : bookName.hashCode());
 		result = prime * result + (int) (idBook ^ (idBook >>> 32));
@@ -88,6 +96,8 @@ public class Book implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Book other = (Book) obj;
+		if (accessLevel != other.accessLevel)
+			return false;
 		if (author == null) {
 			if (other.author != null)
 				return false;
@@ -100,7 +110,6 @@ public class Book implements Serializable{
 			return false;
 		if (idBook != other.idBook)
 			return false;
-		
 		if (numberOfPages != other.numberOfPages)
 			return false;
 		if (year != other.year)
@@ -111,11 +120,6 @@ public class Book implements Serializable{
 	@Override
 	public String toString() {
 		return getClass().getName() + " [idBook=" + idBook + ", bookName=" + bookName + ", author=" + author + ", numberOfPages="
-				+ numberOfPages + ", year=" + year + ", listofAuthors=" + "]";
+				+ numberOfPages + ", year=" + year + ", accessLevel=" + accessLevel + "]";
 	}
-	
-	
-	
-	
-
 }

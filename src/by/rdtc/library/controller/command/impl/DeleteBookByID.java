@@ -1,5 +1,6 @@
 package by.rdtc.library.controller.command.impl;
 
+import by.rdtc.library.bean.UserRole;
 import by.rdtc.library.controller.command.Command;
 import by.rdtc.library.service.BookService;
 import by.rdtc.library.service.exception.ServiceException;
@@ -13,14 +14,23 @@ public class DeleteBookByID implements Command {
 		long idBook = 0;
 		String response = null;
 		boolean success = false;
+		UserRole role = null;
 
 		String[] parameters = null;
 
 		try {
-			parameters = request.split(" ");
+			parameters = request.split(";");
 			idBook = Long.parseLong(parameters[1]);
-		} catch (NumberFormatException nfe) {
-			System.out.println("NumberFormatException: " + nfe.getMessage());
+			role = UserRole.valueOf(parameters[2].toUpperCase());
+		} catch (Exception e) {
+			e.printStackTrace();
+			response = "Wrong request";
+			return response;
+		}
+
+		if (!role.equals(UserRole.ADMIN)) {
+			response = "Not enough permissions to delete book";
+			return response;
 		}
 
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
@@ -28,12 +38,12 @@ public class DeleteBookByID implements Command {
 
 		try {
 			success = bookService.deleteBook(idBook);
-			if(success){
+			if (success) {
 				response = "Book with ID = " + idBook + " deleted ";
 			} else {
-				response = "Book with id=" + idBook + " was not found";
+				response = "Book with id=" + idBook + " is not deleted. It doesn't exist";
 			}
-			
+
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			response = "Error: book was not deleted4";
@@ -41,8 +51,5 @@ public class DeleteBookByID implements Command {
 
 		return response;
 	}
-	
-	
-	
 
 }

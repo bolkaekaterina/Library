@@ -1,2 +1,3 @@
-Adam31;4444;Adam;Brick;31;brick@gmail.com
-Nick5;2222;Nick;Dig;5;nick@gmail.com
+Adam31;4444;Adam;Brick;31;brick@gmail.com;adult
+Nick5;2222;Nick;Dig;5;nick@gmail.com;child
+Den1;1111;Den;Johns;23;den@gmail.com;admin
